@@ -1,0 +1,71 @@
+<div class="flex justify-center items-center">
+  <div class="lg:w-3/5 md:w-1/2 w-2/3">
+    <form
+      [formGroup]="form"
+      (ngSubmit)="onSubmit()"
+      class="bg-white p-10 rounded-lg shadow-lg min-w-full"
+    >
+      <h1 class="text-center text-2xl mb-6 text-gray-600 font-bold font-sans">
+        {{ clientePorEditar() ? "Editar" : "Agregar" }}
+        {{ clientePorEditar()?.nombre || "cliente" }}
+      </h1>
+      <div>
+        <label
+          class="text-gray-800 font-semibold block my-3 text-md"
+          for="username"
+          >Nombre</label
+        >
+        <input
+          class="w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none"
+          type="text"
+          formControlName="nombre"
+          placeholder="Jorge Barril"
+        />
+
+        @if (esInputValido('nombre')) {
+        <span class="text-red-600">
+          {{ mostrarErrorInput("nombre") }}
+        </span>
+        }
+      </div>
+      <div>
+        <label
+          class="text-gray-800 font-semibold block my-3 text-md"
+          for="email"
+          >Descripcion</label
+        >
+        <input
+          class="w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none"
+          type="text"
+          formControlName="descripcion"
+          placeholder="jorge@mail.com"
+        />
+        @if (esInputValido('descripcion')) {
+        <span class="text-red-600">
+          {{ mostrarErrorInput("descripcion") }}
+        </span>
+        }
+      </div>
+
+      <div class="flex justify-items-center justify-between mt-4">
+        <button
+          type="submit"
+          class="flex px-5 py-2 mt-4 bg-blue-500 mr-1 text-white font-semibold rounded"
+        >
+          Guardar
+        </button>
+
+        @if (clientePorEditar()) {
+        <button
+          type="button"
+          class="flex px-5 py-2 mt-4 bg-red-400 mr-1 text-white font-semibold rounded"
+          (click)="eliminarCliente(clientePorEditar()!)"
+        >
+          <span class="ml-1">Eliminar</span>
+        </button>
+        }
+      </div>
+    </form>
+  </div>
+</div>
+

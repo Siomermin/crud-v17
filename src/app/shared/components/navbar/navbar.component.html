@@ -1,0 +1,13 @@
+<div class="p-2 bg-white w-60 flex-col md:flex">
+  <nav>
+    @for (item of menuItems(); track $index) {
+      <a
+      class="block text-gray-500 py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-gradient-to-r hover:from-slate-200 hover:to-slate-100 hover:text-black"
+      [routerLink]="['/clientes/', item.route ]" routerLinkActive="active"
+    >
+      <i class="fas fa-home mr-2"></i>{{ item.title }}
+    </a>
+    }
+
+  </nav>
+</div>
