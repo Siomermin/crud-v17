@@ -52,7 +52,6 @@ export default class NuevoClienteComponent implements OnInit {
         this.clientesService.getClientePorCodigo(codigo)
       );
 
-
       if (!this.clientePorEditar()) {
         this.router.navigateByUrl('/');
         return;
@@ -80,10 +79,10 @@ export default class NuevoClienteComponent implements OnInit {
           return 'Este campo es requerido';
 
         case 'minlength':
-          return `Minimo ${errores['minlength'].requiredLength} caracteres`;
+          return `Mínimo ${errores['minlength'].requiredLength} caracteres`;
 
         case 'maxlength':
-          return `Maximo ${errores['maxlength'].requiredLength} caracteres`;
+          return `Máximo ${errores['maxlength'].requiredLength} caracteres`;
       }
     }
 
@@ -120,12 +119,12 @@ export default class NuevoClienteComponent implements OnInit {
 
       this.clientesService.editarCliente(clienteEditado);
       this.router.navigate(['/clientes/lista']);
-      Swal.fire(`${this.clienteActual.nombre} editado!`);
+      Swal.fire(`${this.clienteActual.nombre} editado!`, '', 'success');
       return;
     }
 
     this.clientesService.agregarCliente(this.clienteActual);
     this.router.navigate(['/clientes/lista']);
-    Swal.fire(`${this.clienteActual.nombre} agregado!`);
+    Swal.fire(`${this.clienteActual.nombre} agregado!`, '', 'success');
   }
 }
