@@ -44,7 +44,6 @@ export class ClientesService {
     const nuevoCliente: Cliente = {
       ...cliente,
       codigo: this.generarCodigo(),
-      activo: true,
     };
 
     this.#clientes().push(nuevoCliente);

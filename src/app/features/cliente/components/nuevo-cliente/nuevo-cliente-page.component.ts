@@ -6,7 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { JsonPipe } from '@angular/common';
+import { AsyncPipe, JsonPipe } from '@angular/common';
 
 import { Cliente } from '../../../../models/cliente.interface';
 import { ClientesService } from '../../../../services/clientes.service';
@@ -16,7 +16,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-nuevo-cliente',
   standalone: true,
-  imports: [ReactiveFormsModule, JsonPipe, RouterModule],
+  imports: [ReactiveFormsModule, JsonPipe, RouterModule, AsyncPipe],
   templateUrl: './nuevo-cliente-page.component.html',
   styles: '',
 })
@@ -42,6 +42,7 @@ export default class NuevoClienteComponent implements OnInit {
       '',
       [Validators.required, Validators.minLength(3), Validators.maxLength(100)],
     ],
+    activo: [true],
   });
 
   ngOnInit(): void {
@@ -87,21 +88,6 @@ export default class NuevoClienteComponent implements OnInit {
     }
 
     return null;
-  }
-
-  eliminarCliente(cliente: Cliente): void {
-    Swal.fire({
-      title: `Esta seguro de eliminar a ${cliente.nombre}?`,
-      showDenyButton: true,
-      confirmButtonText: 'Si, estoy seguro',
-      denyButtonText: `Cancelar`,
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire(`${cliente.nombre} fue eliminado!`, '', 'success');
-        this.clientesService.eliminarCliente(cliente);
-        this.router.navigate(['/clientes/lista']);
-      }
-    });
   }
 
   onSubmit(): void {
